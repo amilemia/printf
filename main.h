@@ -36,9 +36,6 @@ int print_binary(va_list list);
 int print_octal(va_list list);
 int print_hex(va_list list);
 
-/* print_others */
-int print_rot13(va_list list);
-
 /* utilities */
 unsigned int _strlen(char *s);
 void reverse_str(char s[]);

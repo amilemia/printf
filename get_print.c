@@ -18,7 +18,6 @@ int (*get_print(const char *format))(va_list)
 		{"b", print_binary},
 		{"o", print_octal},
 		{"x", print_hex},
-		{"R", print_rot13},
 		{NULL, NULL}};
 
 	for (; fmt_types[i].sym; i++)
