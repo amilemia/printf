@@ -37,7 +37,7 @@ int _printf(const char *format, ...)
 			}
 			pfn = get_print(&format[++i]);
 			/* for invalid formats: print as is */
-			printed += pfn ? pfn(args) : (_putchar('%'), _putchar(format[i]));
+			printed += pfn ? pfn(args) : _putchar('%') + _putchar(format[i]);
 		}
 		else
 			printed += _putchar(format[i]);
