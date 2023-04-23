@@ -16,7 +16,7 @@ int _printf(const char *format, ...)
 	int (*pfn)(va_list);
 	int i = 0, printed = 0;
 
-	if (!format)
+	if (!format || (format[0] == '%' && format[1] == '\0'))
 		return (-1);
 
 	va_start(args, format);
@@ -25,6 +25,9 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
+			/* skip spaces between the % and the format specifier ex: "%  s" */
+			while (format[i + 1] == ' ')
+				i++;
 			pfn = get_print(&format[++i]);
 			/* for invalid formats: print as is */
 			printed += pfn ? pfn(args) : (_putchar('%'), _putchar(format[i]));
