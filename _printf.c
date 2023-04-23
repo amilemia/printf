@@ -25,9 +25,9 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			/*  */
 			pfn = get_print(&format[++i]);
-			printed += pfn(args);
+			/* for invalid formats: print as is */
+			printed += pfn ? pfn(args) : (_putchar('%'), _putchar(format[i]));
 		}
 		else
 			printed += _putchar(format[i]);
