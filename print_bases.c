@@ -38,3 +38,17 @@ int print_hex(va_list list)
 
 	return (to_base_n(num, 16, buffer));
 }
+
+/**
+ * print_HEX - as print_hex() func but in uppercase
+ * @list: va_list of integers to be printed
+ * Return: number of characters printed
+ */
+int print_HEX(va_list list)
+{
+	char buffer[50];
+	unsigned int num = va_arg(list, unsigned int);
+
+	buffer[0] = 'A';
+	return (to_base_n(num, 16, buffer));
+}

@@ -69,6 +69,7 @@ void _itoa(long n, char s[])
 int to_base_n(unsigned int num, int base, char buffer[])
 {
 	int i = 0, rem;
+	char hex_case = (buffer[0] == 'A') ? 'A' : 'a';
 
 	(num == 0) && (buffer[i++] = '0');
 
@@ -79,7 +80,7 @@ int to_base_n(unsigned int num, int base, char buffer[])
 		if (rem < 10)
 			buffer[i++] = rem + '0';
 		else
-			buffer[i++] = rem - 10 + 'a';
+			buffer[i++] = rem - 10 + hex_case;
 
 		num /= base;
 	}
