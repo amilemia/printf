@@ -21,6 +21,7 @@ int (*get_print(const char *format))(va_list)
 		{"X", print_HEX},
 		{"p", print_addrs},
 		{"S", print_STR},
+		{"r", print_rev},
 		{NULL, NULL}};
 
 	for (; fmt_types[i].sym; i++)
