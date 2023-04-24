@@ -40,6 +40,7 @@ int print_addrs(va_list list);
 
 /* print_customs */
 int print_STR(va_list list);
+int print_rev(va_list list);
 
 /* utilities */
 unsigned int _strlen(char *s);
