@@ -64,5 +64,8 @@ int print_addrs(va_list list)
 	void *ptr = va_arg(list, void *);
 	unsigned long address = (unsigned long)ptr;
 
+	if (!ptr)
+		return (_puts("(nil)"));
+
 	return (_puts("0x") + to_base_n(address, 16, buffer));
 }
