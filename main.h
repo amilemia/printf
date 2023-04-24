@@ -36,12 +36,16 @@ int print_binary(va_list list);
 int print_octal(va_list list);
 int print_hex(va_list list);
 int print_HEX(va_list list);
+int print_addrs(va_list list);
+
+/* print_customs */
+int print_STR(va_list list);
 
 /* utilities */
 unsigned int _strlen(char *s);
 void reverse_str(char s[]);
 void _itoa(long n, char s[]);
-int to_base_n(unsigned int num, int base, char s[]);
+int to_base_n(unsigned long num, int base, char s[]);
 char *_memcpy(char *dest, char *src, unsigned int n);
 
 /* writes */

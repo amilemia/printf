@@ -52,3 +52,17 @@ int print_HEX(va_list list)
 	buffer[0] = 'A';
 	return (to_base_n(num, 16, buffer));
 }
+
+/**
+ * print_addrs - prints the address of a given pointer
+ * @list: va_list list of arguments
+ * Return: number of characters printed (including "0x")
+ */
+int print_addrs(va_list list)
+{
+	char buffer[50];
+	void *ptr = va_arg(list, void *);
+	unsigned long address = (unsigned long)ptr;
+
+	return (_puts("0x") + to_base_n(address, 16, buffer));
+}

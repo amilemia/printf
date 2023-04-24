@@ -29,12 +29,10 @@ int _printf(const char *format, ...)
 			if (format[i + 1] == '\0')
 				return (-1);
 			/* skip spaces between the % and the format specifier ex: "%  s" */
-			while (format[i + 1] == ' ')
-			{
+			for (; format[i + 1] == ' '; i++)
 				if (format[i + 2] == '\0')
 					return (-1);
-				i++;
-			}
+
 			pfn = get_print(&format[++i]);
 			/* for invalid formats: print as is */
 			printed += pfn ? pfn(args) : _putchar('%') + _putchar(format[i]);

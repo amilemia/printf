@@ -66,7 +66,7 @@ void _itoa(long n, char s[])
  * Return: number of characters printed
  */
 
-int to_base_n(unsigned int num, int base, char buffer[])
+int to_base_n(unsigned long num, int base, char buffer[])
 {
 	int i = 0, rem;
 	char hex_case = (buffer[0] == 'A') ? 'A' : 'a';
