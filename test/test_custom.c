@@ -33,6 +33,18 @@ int main(void)
 	len_2 = _printf("Current output:    %S\n", NULL);
 	printf("Expected length:    [%d]\n", len_1);
 	printf("Current length:     [%d]\n", len_2);
+	
+	/* ===========> %r <=========== */
+	printf("----------------------\n");
+	printf("------> r CASES <-----\n");
+	printf("----------------------\n");
+
+	/* Test 1: Reverse string*/
+	len_1 = _printf("%r\n", "Reverse it");
+	printf("String len: %d\n", len_1);
+	/* Test 1: NULL argument*/
+	len_2 = _printf("%r\n", NULL);
+	printf("String len: %d\n", len_2);
 
 	return (0);
 }
