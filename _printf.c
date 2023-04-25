@@ -42,7 +42,7 @@ int _printf(const char *format, ...)
 					return (-1);
 			num = va_arg(args_copy, long);
 			parse_flags(format, &flags, num, &printed, &i);
-			pfn = get_print(&format[i]);
+			pfn = get_print(&format[++i]);
 			/* for invalid formats: print as is */
 			printed += pfn ? pfn(args) : _putchar('%') + _putchar(format[i]);
 		}
