@@ -90,21 +90,16 @@ int to_base_n(unsigned long num, int base, char buffer[])
 }
 
 /**
- * _memcpy - copies memory area.
- * @dest: memory area to copy to.
- * @src: memory area to copy from.
- * @n: bytes of memory.
- * Return: a pointer to dest.
+ * _isdigit - checks for a digit
+ * @c: the character to be checked
+ *
+ * Return: 1 if c is a digit, else 0
  */
 
-char *_memcpy(char *dest, char *src, unsigned int n)
+int _isdigit(int c)
 {
-	unsigned int i = 0;
-
-	for (; i < n; i++)
-		dest[i] = src[i];
-
-	dest[i] = '\0';
-
-	return (dest);
+	if (c >= '0' && c <= '9')
+		return (1);
+	else
+		return (0);
 }
