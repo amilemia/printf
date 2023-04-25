@@ -19,20 +19,19 @@ void parse_flags(const char *format, flags_t *flags,
 	for (flags->j++; format[flags->j]; flags->j++)
 	{
 		if (format[flags->j] == '+')
-			flags->plus = 1;
+			(flags->plus = 1, (*i)++);
 		else if (format[flags->j] == ' ')
 		{
 			/* if after % more than one space, return */
 			if (format[flags->j + 1] == ' ')
 				return;
+
 			flags->space = 1;
-			(*i)--;
 		}
 		else if (format[flags->j] == '#')
-			flags->hash = 1;
+			(flags->hash = 1, (*i)++);
 		else
 			break;
-		(*i)++;
 	}
 
 	if (flags->plus && flags->space)
