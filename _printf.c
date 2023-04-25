@@ -27,7 +27,7 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			if (format[i + 1] == '\0')
+			if (format[++i] == '\0')
 				return (-1);
 			/* flag handler */
 			num = va_arg(args_copy, long);
@@ -64,8 +64,8 @@ int _printf(const char *format, ...)
  */
 int whitespaces(const char *format, int *i)
 {
-	for (; format[*i + 1] == ' '; (*i)++)
-		if (format[*i + 2] == '\0')
+	for (; format[*i] == ' '; (*i)++)
+		if (format[*i + 1] == '\0')
 			return (0);
 	if (format[*i] == ' ')
 		(*i)++;
