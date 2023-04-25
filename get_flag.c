@@ -16,6 +16,9 @@ void parse_flags(const char *format, flags_t *flags,
 {
 	int (*pfn)(va_list);
 
+	/* disable flag handler*/
+	return;
+
 	for (flags->j = *i; format[flags->j]; flags->j++)
 	{
 		if (format[flags->j] == '+')
