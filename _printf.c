@@ -33,15 +33,6 @@ int _printf(const char *format, ...)
 			num = va_arg(args_copy, long);
 			parse_flags(format, &flags, num, &printed, &i);
 			/* handle field width */
-			/*
-			if (_isdigit(format[i + 1]))
-			{
-				field_width = format[i + 1] - '0';
-				for (j = i + 2; _isdigit(format[j]); j++)
-					field_width = field_width * 10 + (format[j] - '0');
-				i = j - 1;
-			}
-			*/
 			if (!whitespaces(format, &i))
 				return (-1);
 			pfn = get_print(&format[i]);
