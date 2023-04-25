@@ -14,7 +14,7 @@
 void parse_flags(const char *format, flags_t *flags,
 				 int num, int *printed, int *i)
 {
-	int (*pfn)(va_list);
+	int (*pfn)(va_list, int);
 
 	for (flags->j = *i; format[flags->j]; flags->j++)
 	{
