@@ -20,16 +20,15 @@ void parse_flags(const char *format, flags_t *flags,
 	{
 		if (format[flags->j] == '+')
 			(flags->plus = 1, (*i)++);
+		else if (format[flags->j] == '#')
+			(flags->hash = 1, (*i)++);
 		else if (format[flags->j] == ' ')
 		{
 			/* if after % more than one space, return */
 			if (format[flags->j + 1] == ' ')
 				return;
-
-			flags->space = 1;
+			(flags->space = 1, (*i)++);
 		}
-		else if (format[flags->j] == '#')
-			(flags->hash = 1, (*i)++);
 		else
 			break;
 	}
@@ -44,7 +43,7 @@ void parse_flags(const char *format, flags_t *flags,
 	/* handle flag: (#) */
 	if (flags->hash)
 	{
-		pfn = get_print(&format[*i + 1]);
+		pfn = get_print(&format[*i]);
 		if (pfn == print_octal)
 			*printed += _putchar('0');
 		else if (pfn == print_hex)
