@@ -14,7 +14,8 @@ int _printf(const char *format, ...)
 {
 	va_list args;
 	int (*pfn)(va_list);
-	int i = 0, printed = 0;
+	int i = 0, j = 0, printed = 0;
+	int field_width = 0;
 
 	if (!format)
 		return (-1);
@@ -25,6 +26,14 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
+			/* handle field width */
+			if (_isdigit(format[i + 1]))
+			{
+				field_width = format[i + 1] - '0';
+				for (j = i + 2; _isdigit(format[j]); j++)
+					field_width = field_width * 10 + (format[j] - '0');
+				i = j - 1;
+			}
 			/* if the string ends with a %, returns -1 */
 			if (format[i + 1] == '\0')
 				return (-1);
