@@ -5,13 +5,13 @@
  * @list: va_list of integers to be printed
  * Return: number of characters printed
  */
-int print_int(va_list list)
+int print_int(va_list list, int field_width)
 {
 	int num = va_arg(list, int);
 	char buffer[50];
 	int len;
 	int i;
-	int field_width = 0;
+	int count = 0;
 
 	_itoa(num, buffer);
 	len = _strlen(buffer);
@@ -19,9 +19,10 @@ int print_int(va_list list)
 	if (field_width > len)
 	{
 		for (i = 0; i < field_width - len; i++)
-			_putchar(' ');
+		count += _putchar(' ');
 	}
-	return (_puts(buffer));
+	count += _puts(buffer);
+	return (count);
 }
 
 
@@ -30,10 +31,11 @@ int print_int(va_list list)
  * @list: va_list of unsigned integers to be printed
  * Return: number of characters printed
  */
-int print_unsigned(va_list list)
+int print_unsigned(va_list list, int field_width)
 {
 	unsigned int num = va_arg(list, unsigned int);
 	char buffer[50];
+	(void)(field_width);
 
 	_itoa(num, buffer);
 	return (_puts(buffer));
