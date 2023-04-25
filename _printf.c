@@ -38,7 +38,7 @@ int _printf(const char *format, ...)
 				field_width = format[i] - '0';
 				for (j = i + 1; _isdigit(format[j]); j++)
 					field_width = field_width * 10 + (format[j] - '0');
-				i = j - 1;
+				i = j;
 			}
 			if (!whitespaces(format, &i))
 				return (-1);
