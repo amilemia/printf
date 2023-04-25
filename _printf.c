@@ -40,12 +40,6 @@ int _printf(const char *format, ...)
 					field_width = field_width * 10 + (format[j] - '0');
 				i = j - 1;
 			}
-			/* skip spaces between the % and the format specifier ex: "%  s" */
-			for (; format[i + 1] == ' '; i++)
-				if (format[i + 2] == '\0')
-					return (-1);
-			if (format[i] == ' ')
-				i++;
 			if (!whitespaces(format, &i))
 				return (-1);
 			pfn = get_print(&format[i]);
@@ -72,6 +66,6 @@ int whitespaces(const char *format, int *i)
 		if (format[*i + 2] == '\0')
 			return (0);
 	if (format[*i] == ' ')
-		i++;
+		(*i)++;
 	return (1);
 }
