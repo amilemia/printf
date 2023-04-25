@@ -47,7 +47,7 @@ unsigned int _strlen(char *s);
 void reverse_str(char s[]);
 void _itoa(long n, char s[]);
 int to_base_n(unsigned long num, int base, char s[]);
-char *_memcpy(char *dest, char *src, unsigned int n);
+int _isdigit(int c);
 
 /* writes */
 int _putchar(char c);
