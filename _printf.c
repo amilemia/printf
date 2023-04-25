@@ -12,16 +12,15 @@
  */
 int _printf(const char *format, ...)
 {
-	va_list args;
+	va_list args, args_copy;
+	flags_t flags = {0};
 	int (*pfn)(va_list);
-	int i = 0, j = 0, printed = 0;
-	int field_width = 0;
+	int i = 0, j, printed = 0, num, field_width;
 
 	if (!format)
 		return (-1);
-
 	va_start(args, format);
-
+	va_copy(args_copy, args);
 	for (; format && format[i]; i++)
 	{
 		if (format[i] == '%')
@@ -41,7 +40,8 @@ int _printf(const char *format, ...)
 			for (; format[i + 1] == ' '; i++)
 				if (format[i + 2] == '\0')
 					return (-1);
-
+			num = va_arg(args_copy, long);
+			parse_flags(format, &flags, num, &printed, &i);
 			pfn = get_print(&format[++i]);
 			/* for invalid formats: print as is */
 			printed += pfn ? pfn(args) : _putchar('%') + _putchar(format[i]);
@@ -49,7 +49,7 @@ int _printf(const char *format, ...)
 		else
 			printed += _putchar(format[i]);
 	}
-
 	va_end(args);
+	va_end(args_copy);
 	return (printed);
 }

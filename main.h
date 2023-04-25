@@ -16,11 +16,21 @@ typedef struct fmt
 	int (*fn)(va_list);
 } fmt_t;
 
+typedef struct flags
+{
+	int j;
+	int plus;
+	int space;
+	int hash;
+} flags_t;
+
 /* main */
 int _printf(const char *format, ...);
 
-/* print handler */
+/* handlers */
 int (*get_print(const char *format))(va_list);
+void parse_flags(const char *format, flags_t *flags,
+				 int, int *, int *);
 
 /* print_chars */
 int print_char(va_list list);
