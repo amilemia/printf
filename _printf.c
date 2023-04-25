@@ -1,5 +1,7 @@
 #include "main.h"
 
+int whitespaces(const char *format, int *i);
+
 /**
  * _printf - prints a formatted string to stdout, similar to printf.
  * @format: the format of the string to be printed.
@@ -25,6 +27,11 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
+			if (format[i++ + 1] == '\0')
+				return (-1);
+			/* flag handler */
+			num = va_arg(args_copy, long);
+			parse_flags(format, &flags, num, &printed, &i);
 			/* handle field width */
 			if (_isdigit(format[i + 1]))
 			{
@@ -33,16 +40,15 @@ int _printf(const char *format, ...)
 					field_width = field_width * 10 + (format[j] - '0');
 				i = j - 1;
 			}
-			/* if the string ends with a %, returns -1 */
-			if (format[i + 1] == '\0')
-				return (-1);
 			/* skip spaces between the % and the format specifier ex: "%  s" */
 			for (; format[i + 1] == ' '; i++)
 				if (format[i + 2] == '\0')
 					return (-1);
-			num = va_arg(args_copy, long);
-			parse_flags(format, &flags, num, &printed, &i);
-			pfn = get_print(&format[++i]);
+			if (format[i] == ' ')
+				i++;
+			if (!whitespaces(format, &i))
+				return (-1);
+			pfn = get_print(&format[i]);
 			/* for invalid formats: print as is */
 			printed += pfn ? pfn(args) : _putchar('%') + _putchar(format[i]);
 		}
@@ -52,4 +58,20 @@ int _printf(const char *format, ...)
 	va_end(args);
 	va_end(args_copy);
 	return (printed);
+}
+
+/**
+ * whitespaces - Skip whitespaces in a string
+ * @format: The string to be evaluated
+ * @i: Pointer to the index of the character being evaluated
+ * Return: 1 if valid specifer, 0 otherwise
+ */
+int whitespaces(const char *format, int *i)
+{
+	for (; format[*i + 1] == ' '; (*i)++)
+		if (format[*i + 2] == '\0')
+			return (0);
+	if (format[*i] == ' ')
+		i++;
+	return (1);
 }

@@ -16,25 +16,23 @@ void parse_flags(const char *format, flags_t *flags,
 {
 	int (*pfn)(va_list);
 
-	/* disable flag handler*/
-	return;
-
-	for (flags->j++; format[flags->j]; flags->j++)
+	for (flags->j = *i; format[flags->j]; flags->j++)
 	{
 		if (format[flags->j] == '+')
-			(flags->plus = 1, (*i)++);
+			flags->plus = 1;
 		else if (format[flags->j] == '#')
-			(flags->hash = 1, (*i)++);
+			flags->hash = 1;
 		else if (format[flags->j] == ' ')
 		{
 			/* if after % more than one space, return */
 			if (format[flags->j + 1] == ' ')
 				return;
-			(flags->space = 1, (*i)++);
+			flags->space = 1;
 		}
 		else
 			break;
 	}
+	*i = flags->j;
 
 	if (flags->plus && flags->space)
 		flags->space = 0;
