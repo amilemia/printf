@@ -6,8 +6,9 @@
  * Return: count of characters printed.
  */
 
-int print_char(va_list list)
+int print_char(va_list list, int field_width)
 {
+	(void)(field_width);
 	_putchar(va_arg(list, int));
 	return (1);
 }
@@ -18,10 +19,11 @@ int print_char(va_list list)
  * Return: count of characters printed.
  */
 
-int print_str(va_list list)
+int print_str(va_list list, int field_width)
 {
 	int i = 0;
 	char *str;
+	(void)(field_width);
 
 	str = va_arg(list, char *);
 	if (!str)
@@ -39,8 +41,9 @@ int print_str(va_list list)
  * Return: count of characters printed.
  */
 
-int print_perc(va_list list)
+int print_perc(va_list list, int field_width)
 {
+	(void)(field_width);
 	(void)(list);
 	_putchar('%');
 	return (1);
