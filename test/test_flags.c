@@ -49,5 +49,48 @@ int main(void)
 	printf("Expected length:    [%d]\n", len_1);
 	printf("Current length:     [%d]\n", len_2);
 
+	/* Test the (0) flag with positive and negative integers */
+	len_1 = _printf("%010d\n", 123);
+	len_2 = printf("%010d\n", 123);
+	printf("Expected length:    [%d]\n", len_1);
+	printf("Current length:     [%d]\n", len_2);
+
+	len_1 = _printf("%010d\n", -123);
+	len_2 = printf("%010d\n", -123);
+	printf("Expected length:    [%d]\n", len_1);
+	printf("Current length:     [%d]\n", len_2);
+
+	/* Test the (-) flag with positive and negative integers */
+	len_1 = _printf("%-10d\n", 123);
+	len_2 = printf("%-10d\n", 123);
+	printf("Expected length:    [%d]\n", len_1);
+	printf("Current length:     [%d]\n", len_2);
+
+	len_1 = _printf("%-10d\n", -123);
+	len_2 = printf("%-10d\n", -123);
+	printf("Expected length:    [%d]\n", len_1);
+	printf("Current length:     [%d]\n", len_2);
+
+	/* Test combinations of flags */
+	len_1 = _printf("%0+10d\n", 123);
+	len_2 = printf("%0+10d\n", 123);
+	printf("Expected length:    [%d]\n", len_1);
+	printf("Current length:     [%d]\n", len_2);
+
+	len_1 = _printf("%0+10d\n", -123);
+	len_2 = printf("%0+10d\n", -123);
+	printf("Expected length:    [%d]\n", len_1);
+	printf("Current length:     [%d]\n", len_2);
+
+	len_1 = _printf("%-+10d\n", 123);
+	len_2 = printf("%-+10d\n", 123);
+	printf("Expected length:    [%d]\n", len_1);
+	printf("Current length:     [%d]\n", len_2);
+
+	len_1 = _printf("%-+10d\n", -123);
+	len_2 = printf("%-+10d\n", -123);
+	printf("Expected length:    [%d]\n", len_1);
+	printf("Current length:     [%d]\n", len_2);
+
 	return (0);
 }
