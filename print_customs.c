@@ -5,12 +5,11 @@
  * @list: the va_list containing the string to be printed.
  * Return: count of characters printed.
  */
-int print_STR(va_list list, int field_width)
+int print_STR(va_list list)
 {
 	int i = 0, non_printable = 1, count = 0;
 	char *str;
 	char buffer[3];
-	(void)(field_width);
 
 	str = va_arg(list, char *);
 	if (!str)
@@ -38,11 +37,10 @@ int print_STR(va_list list, int field_width)
  * @list: the arguments list passed to va_start()
  * Return: the number of characters printed to the stdout stream
  */
-int print_rev(va_list list, int field_width)
+int print_rev(va_list list)
 {
 	char *str, buffer[50];
 	int i;
-	(void)(field_width);
 
 	str = va_arg(list, char *);
 
@@ -66,31 +64,32 @@ int print_rev(va_list list, int field_width)
  */
 int print_rot13(va_list list)
 {
-	char *str = va_arg(list, char *);
-	char c;
-	int i, j, count = 0;
-	char in[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-	char out[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
+    char *str = va_arg(list, char *);
+    char c;
+    int i, j, count = 0;
+    char in[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    char out[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
 
-	if (str == NULL)
-	{
-		str = "(null)";
-		count += _puts(str);
-		return (count);
-	}
-	for (i = 0; str[i] != '\0'; i++)
-	{
-		c = str[i];
-		for (j = 0; in[j] != '\0'; j++)
-		{
-			if (c == in[j])
-			{
-				c = out[j];
-				break;
-			}
-		}
-		count += _putchar(c);
-	}
+    if (str == NULL)
+    {
+        str = "(null)";
+        count += _puts(str);
+        return (count);
+    }
 
-	return (count);
+    for (i = 0; str[i] != '\0'; i++)
+    {
+        c = str[i];
+        for (j = 0; in[j] != '\0'; j++)
+        {
+            if (c == in[j])
+            {
+                c = out[j];
+                break;
+            }
+        }
+        count += _putchar(c);
+    }
+
+    return (count);
 }

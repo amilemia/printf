@@ -5,7 +5,7 @@
  * @list: va_list of integers to be printed
  * Return: number of characters printed
  */
-int print_int(va_list list, int field_width)
+int print_int(va_list list)
 {
 	int num = va_arg(list, int);
 	char buffer[50];
@@ -20,11 +20,10 @@ int print_int(va_list list, int field_width)
  * @list: va_list of unsigned integers to be printed
  * Return: number of characters printed
  */
-int print_unsigned(va_list list, int field_width)
+int print_unsigned(va_list list)
 {
 	unsigned int num = va_arg(list, unsigned int);
 	char buffer[50];
-	(void)(field_width);
 
 	_itoa(num, buffer);
 	return (_puts(buffer));

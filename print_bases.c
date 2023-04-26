@@ -5,11 +5,10 @@
  * @list: va_list of integers to be printed
  * Return: number of characters printed
  */
-int print_binary(va_list list, int field_width)
+int print_binary(va_list list)
 {
 	char buffer[50];
 	unsigned int num = va_arg(list, unsigned int);
-	(void)(field_width);
 
 	return (to_base_n(num, 2, buffer));
 }
@@ -19,11 +18,10 @@ int print_binary(va_list list, int field_width)
  * @list: va_list of integers to be printed
  * Return: number of characters printed
  */
-int print_octal(va_list list, int field_width)
+int print_octal(va_list list)
 {
 	char buffer[50];
 	unsigned int num = va_arg(list, unsigned int);
-	(void)(field_width);
 
 	return (to_base_n(num, 8, buffer));
 }
@@ -33,22 +31,20 @@ int print_octal(va_list list, int field_width)
  * @list: va_list of integers to be printed
  * Return: number of characters printed
  */
-int print_hex(va_list list, int field_width)
+int print_hex(va_list list)
 {
 	char buffer[50];
 	unsigned int num = va_arg(list, unsigned int);
 	int len = _strlen(buffer);
+	int field_width = 0;
 	int i;
-	int count = 0;
-	(void)(field_width);
 
 	if (field_width > len)
 	{
 		for (i = 0; i < field_width - len; i++)
-			count += _putchar(' ');
+			_putchar('0');
 	}
-	count += to_base_n(num, 16, buffer);
-	return (count);
+	return (to_base_n(num, 16, buffer));
 }
 
 /**
@@ -56,11 +52,10 @@ int print_hex(va_list list, int field_width)
  * @list: va_list of integers to be printed
  * Return: number of characters printed
  */
-int print_HEX(va_list list, int field_width)
+int print_HEX(va_list list)
 {
 	char buffer[50];
 	unsigned int num = va_arg(list, unsigned int);
-	(void)(field_width);
 
 	buffer[0] = 'A';
 	return (to_base_n(num, 16, buffer));
@@ -71,12 +66,11 @@ int print_HEX(va_list list, int field_width)
  * @list: va_list list of arguments
  * Return: number of characters printed (including "0x")
  */
-int print_addrs(va_list list, int field_width)
+int print_addrs(va_list list)
 {
 	char buffer[50];
 	void *ptr = va_arg(list, void *);
 	unsigned long address = (unsigned long)ptr;
-	(void)(field_width);
 
 	if (!ptr)
 		return (_puts("(nil)"));

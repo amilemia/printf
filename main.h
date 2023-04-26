@@ -13,7 +13,7 @@
 typedef struct fmt
 {
 	char *sym;
-	int (*fn)(va_list, int);
+	int (*fn)(va_list);
 } fmt_t;
 
 typedef struct flags
@@ -28,29 +28,30 @@ typedef struct flags
 int _printf(const char *format, ...);
 
 /* handlers */
-int (*get_print(const char *format))(va_list, int);
+int (*get_print(const char *format))(va_list);
 void parse_flags(const char *format, flags_t *flags,
 				 int, int *, int *);
 
 /* print_chars */
-int print_char(va_list list, int field_width);
-int print_str(va_list list, int field_width);
-int print_perc(va_list list, int field_width);
+int print_char(va_list list);
+int print_str(va_list list);
+int print_perc(va_list list);
 
 /* print_numbers */
-int print_int(va_list list, int field_width);
-int print_unsigned(va_list list, int field_width);
+int print_int(va_list list);
+int print_unsigned(va_list list);
 
 /* print_bases */
-int print_binary(va_list list, int field_width);
-int print_octal(va_list list, int field_width);
-int print_hex(va_list list, int field_width);
-int print_HEX(va_list list, int field_width);
-int print_addrs(va_list list, int field_width);
+int print_binary(va_list list);
+int print_octal(va_list list);
+int print_hex(va_list list);
+int print_HEX(va_list list);
+int print_addrs(va_list list);
 
 /* print_customs */
 int print_STR(va_list list);
 int print_rev(va_list list);
+int print_rot13(va_list list);
 
 /* utilities */
 unsigned int _strlen(char *s);
