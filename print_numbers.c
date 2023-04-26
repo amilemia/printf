@@ -9,18 +9,8 @@ int print_int(va_list list)
 {
 	int num = va_arg(list, int);
 	char buffer[50];
-	int len;
-	int i;
-	int field_width = 0;
 
 	_itoa(num, buffer);
-	len = _strlen(buffer);
-
-	if (field_width > len)
-	{
-		for (i = 0; i < field_width - len; i++)
-			_putchar(' ');
-	}
 	return (_puts(buffer));
 }
 
