@@ -56,3 +56,39 @@ int print_rev(va_list list)
 
 	return (_puts(buffer));
 }
+
+/**
+ * print_rot13 - prints a string in rot13
+ * @list: va_list containing the string to print
+ * Return: the number of characters printed
+ */
+int print_rot13(va_list list)
+{
+	char *str = va_arg(list, char *);
+	char c;
+	int i, j, count = 0;
+	char in[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	char out[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
+
+	if (str == NULL)
+	{
+		str = "(null)";
+		count += _puts(str);
+		return (count);
+	}
+	for (i = 0; str[i] != '\0'; i++)
+	{
+		c = str[i];
+		for (j = 0; in[j] != '\0'; j++)
+		{
+			if (c == in[j])
+			{
+				c = out[j];
+				break;
+			}
+		}
+		count += _putchar(c);
+	}
+
+	return (count);
+}
