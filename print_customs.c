@@ -5,11 +5,12 @@
  * @list: the va_list containing the string to be printed.
  * Return: count of characters printed.
  */
-int print_STR(va_list list)
+int print_STR(va_list list, int field_width)
 {
 	int i = 0, non_printable = 1, count = 0;
 	char *str;
 	char buffer[3];
+	(void)(field_width);
 
 	str = va_arg(list, char *);
 	if (!str)
@@ -37,10 +38,11 @@ int print_STR(va_list list)
  * @list: the arguments list passed to va_start()
  * Return: the number of characters printed to the stdout stream
  */
-int print_rev(va_list list)
+int print_rev(va_list list, int field_width)
 {
 	char *str, buffer[50];
 	int i;
+	(void)(field_width);
 
 	str = va_arg(list, char *);
 
