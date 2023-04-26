@@ -24,7 +24,6 @@ void parse_flags(const char *format, flags_t *flags,
 			flags->hash = 1;
 		else if (format[flags->j] == ' ')
 		{
-			/* if after % more than one space, return */
 			if (format[flags->j + 1] == '%')
 				(*i)++;
 			else

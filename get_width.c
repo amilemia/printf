@@ -15,8 +15,6 @@ void parse_width(const char *format, va_list args_copy, int *printed, int *i)
 	int (*pfn)(va_list);
 	int j, k, len, field_width;
 
-	/* disable width handler */
-	return;
 	if (_isdigit(format[*i]))
 	{
 		field_width = format[*i] - '0';
