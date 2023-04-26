@@ -14,6 +14,12 @@ void parse_width(const char *format, va_list args_copy, int *printed, int *i)
 {
 	int (*pfn)(va_list);
 	int j, k, len, field_width;
+	char pad_char = ' ';
+
+	if (format[*i] == '0')
+	{
+		(pad_char = '0', (*i)++);
+	}
 
 	if (_isdigit(format[*i]))
 	{
@@ -31,7 +37,7 @@ void parse_width(const char *format, va_list args_copy, int *printed, int *i)
 	if (field_width > len)
 	{
 		for (k = 0; k < field_width - len; k++)
-			*printed += _putchar(' ');
+			*printed += _putchar(pad_char);
 	}
 }
 
