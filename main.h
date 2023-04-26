@@ -16,6 +16,14 @@ typedef struct fmt
 	int (*fn)(va_list);
 } fmt_t;
 
+/**
+ * struct flags - A structure for storing the status of different flag options.
+ * @j: Integer that indicates the maximum number of characters to print.
+ * @plus: Integer that represents the plus sign option.
+ * @space: Integer that represents the space option.
+ * @hash: Integer that represents the hash option.
+ **/
+
 typedef struct flags
 {
 	int j;

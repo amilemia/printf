@@ -64,32 +64,32 @@ int print_rev(va_list list)
  */
 int print_rot13(va_list list)
 {
-    char *str = va_arg(list, char *);
-    char c;
-    int i, j, count = 0;
-    char in[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    char out[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
+	char *str = va_arg(list, char *);
+	char c;
+	int i, j, count = 0;
+	char in[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	char out[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
 
-    if (str == NULL)
-    {
-        str = "(null)";
-        count += _puts(str);
-        return (count);
-    }
+	if (str == NULL)
+	{
+		str = "(null)";
+		count += _puts(str);
+		return (count);
+	}
 
-    for (i = 0; str[i] != '\0'; i++)
-    {
-        c = str[i];
-        for (j = 0; in[j] != '\0'; j++)
-        {
-            if (c == in[j])
-            {
-                c = out[j];
-                break;
-            }
-        }
-        count += _putchar(c);
-    }
+	for (i = 0; str[i] != '\0'; i++)
+	{
+		c = str[i];
+		for (j = 0; in[j] != '\0'; j++)
+		{
+			if (c == in[j])
+			{
+				c = out[j];
+				break;
+			}
+		}
+		count += _putchar(c);
+	}
 
-    return (count);
+	return (count);
 }
