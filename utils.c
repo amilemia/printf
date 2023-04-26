@@ -65,7 +65,6 @@ void _itoa(long n, char s[])
  * @buffer: the character array that will hold the resulting string
  * Return: number of characters printed
  */
-
 int to_base_n(unsigned long num, int base, char buffer[])
 {
 	int i = 0, rem;
@@ -90,16 +89,21 @@ int to_base_n(unsigned long num, int base, char buffer[])
 }
 
 /**
- * _isdigit - checks for a digit
- * @c: the character to be checked
- *
- * Return: 1 if c is a digit, else 0
+ * num_len_base - Calculates the length of a number in a given base
+ * @num: The number to calculate the length of
+ * @base: The base to use for the calculation
+ * Return: The length of the number in the given base
  */
-
-int _isdigit(int c)
+int num_len_base(long num, int base)
 {
-	if (c >= '0' && c <= '9')
+	int count = 0;
+
+	if (num == 0)
 		return (1);
-	else
-		return (0);
+	while (num > 0)
+	{
+		num /= base;
+		count++;
+	}
+	return (count);
 }

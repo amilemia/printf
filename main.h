@@ -32,6 +32,17 @@ typedef struct flags
 	int hash;
 } flags_t;
 
+/**
+ * struct function_t - Holds a function pointer and its base value.
+ * @base: The base value for the function.
+ * @pfn: Pointer to the function.
+ **/
+typedef struct
+{
+	int base;
+	int (*pfn)(va_list);
+} function_t;
+
 /* main */
 int _printf(const char *format, ...);
 
@@ -39,6 +50,7 @@ int _printf(const char *format, ...);
 int (*get_print(const char *format))(va_list);
 void parse_flags(const char *format, flags_t *flags,
 				 int, int *, int *);
+void parse_width(const char *format, va_list args, int *printed, int *i);
 
 /* print_chars */
 int print_char(va_list list);
@@ -66,7 +78,7 @@ unsigned int _strlen(char *s);
 void reverse_str(char s[]);
 void _itoa(long n, char s[]);
 int to_base_n(unsigned long num, int base, char s[]);
-int _isdigit(int c);
+int num_len_base(long num, int base);
 
 /* writes */
 int _putchar(char c);

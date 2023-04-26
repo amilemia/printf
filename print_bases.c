@@ -35,15 +35,7 @@ int print_hex(va_list list)
 {
 	char buffer[50];
 	unsigned int num = va_arg(list, unsigned int);
-	int len = _strlen(buffer);
-	int field_width = 0;
-	int i;
 
-	if (field_width > len)
-	{
-		for (i = 0; i < field_width - len; i++)
-			_putchar('0');
-	}
 	return (to_base_n(num, 16, buffer));
 }
 

@@ -14,7 +14,6 @@ int print_int(va_list list)
 	return (_puts(buffer));
 }
 
-
 /**
  * print_unsigned - prints unsigned integers from a va_list
  * @list: va_list of unsigned integers to be printed
