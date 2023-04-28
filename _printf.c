@@ -16,8 +16,9 @@ int _printf(const char *format, ...)
 {
 	va_list args, args_flags, args_width;
 	flags_t flags = {0};
+	width_t width = {0};
 	int (*pfn)(va_list);
-	int i = 0, printed = 0, num;
+	int i = 0, printed = 0;
 
 	if (!format)
 		return (-1);
@@ -29,14 +30,13 @@ int _printf(const char *format, ...)
 		{
 			if (!valid_precentage(format, &i))
 				return (-1);
-			/* flag handler */
-			num = va_arg(args_flags, long);
-			parse_flags(format, &flags, num, &printed, &i);
-			/* width handler */
-			parse_width(format, args_width, &printed, &i);
-			/* print handler */
-			pfn = get_print(&format[i]);
-			/* for invalid formats: print as is, otherwise get print_func */
+			/* get conversion_index by getting [flags, width..] first */
+			pfn = get_conversion(format, &i, args, &flags, &width);
+
+			parse_flags(&flags, args_flags, pfn, &printed);
+			parse_width(&width, args_width, pfn, &printed);
+
+			/* for valid conversion call print_func, otherwise print as is*/
 			printed += pfn
 						   ? pfn(args)
 						   : _putchar('%') + _putchar(format[i]);
