@@ -32,6 +32,13 @@ typedef struct flags
 	int hash;
 } flags_t;
 
+typedef struct width
+{
+	int value;
+	int is_zero;
+	int is_astreak;
+} width_t;
+
 /**
  * struct function_t - Holds a function pointer and its base value.
  * @base: The base value for the function.
@@ -46,11 +53,19 @@ typedef struct
 /* main */
 int _printf(const char *format, ...);
 
+/* getters */
+typedef int (*pfn_t)(va_list);
+void get_flags(const char *format, flags_t *flags, int *i);
+void get_width(const char *format, width_t *width, int *i);
+pfn_t get_print(const char *format);
+pfn_t get_conversion(const char *format, int *i, va_list args,
+					 flags_t *flags, width_t *width);
+
 /* handlers */
-int (*get_print(const char *format))(va_list);
-void parse_flags(const char *format, flags_t *flags,
-				 int, int *, int *);
-void parse_width(const char *format, va_list args, int *printed, int *i);
+void parse_flags(flags_t *flags, va_list args_flags,
+				 pfn_t pfn, int *printed);
+void parse_width(width_t *width, va_list args_width,
+				 pfn_t pfn, int *printed);
 
 /* print_chars */
 int print_char(va_list list);

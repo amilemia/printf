@@ -5,7 +5,7 @@
  * @format: format of the argument to be printed
  * Return: pointer to the appropriate print func, OR NULL if no match is found.
  */
-int (*get_print(const char *format))(va_list)
+pfn_t get_print(const char *format)
 {
 	int i = 0;
 	fmt_t fmt_types[] = {
