@@ -1,21 +1,13 @@
 #include "main.h"
 
 /**
- * parse_flags - parses flags in a format string
- * @format: the format string
- * @flags: pointer to a flags_t struct
- * @num:  passed number in  va_list args
- * @printed: pointer to the count of characters printed
- * @i: pointer to the index of the format string
- *
- * This function parses flags in a format string and updates the flags_t struct
- * accordingly. It also handles the (+), (space), (#) flags.
+ * get_flags - Get the flags from a format string
+ * @format: The format string
+ * @flags: Pointer to a flags_t struct containing any flags found
+ * @i: Pointer to the current index in the format string
  */
-void parse_flags(const char *format, flags_t *flags,
-				 int num, int *printed, int *i)
+void get_flags(const char *format, flags_t *flags, int *i)
 {
-	int (*pfn)(va_list);
-
 	for (flags->j = *i; format[flags->j]; flags->j++)
 	{
 		if (format[flags->j] == '+')
@@ -33,9 +25,21 @@ void parse_flags(const char *format, flags_t *flags,
 			break;
 	}
 	*i = flags->j;
-	if (*i == 1)
-		return;
-	pfn = get_print(&format[*i]);
+}
+
+/**
+ * parse_flags - parses flags for printing
+ * @flags: pointer to a flags_t struct containing the flags found
+ * @args_flags: va_list of arguments
+ * @pfn: pointer to returned func from get_print()
+ * @printed: pointer to the count of characters printed
+ */
+void parse_flags(flags_t *flags, va_list args_flags,
+				 pfn_t pfn, int *printed)
+{
+	int num;
+
+	num = va_arg(args_flags, long);
 
 	if (flags->plus && flags->space)
 		flags->space = 0;

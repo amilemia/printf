@@ -4,21 +4,26 @@ int _isdigit(int c);
 int get_length(int (*pfn)(va_list), va_list args_copy);
 
 /**
- * parse_width - parses the width of a field in a format string
- * @format: the format string
- * @args_copy: the va_list copy
- * @printed: pointer to the number of characters printed
- * @i: pointer to the current index in the format string
+ * get_width - Retrieve the width of a field from a format string
+ * @format: The format string
+ * @width: pointer to a width_t struct containing the width found
+ * @i: Pointer to the current index in the format string
  */
-void parse_width(const char *format, va_list args_copy, int *printed, int *i)
+void get_width(const char *format, width_t *width, int *i)
 {
-	int (*pfn)(va_list);
-	int j, k, len, field_width;
-	char pad_char = ' ';
+	int j, field_width;
 
 	if (format[*i] == '0')
 	{
-		(pad_char = '0', (*i)++);
+		width->is_zero = 1;
+		(*i)++;
+	}
+
+	if (format[*i] == '*')
+	{
+		width->is_astreak = 1;
+		(*i)++;
+		return;
 	}
 
 	if (_isdigit(format[*i]))
@@ -26,17 +31,39 @@ void parse_width(const char *format, va_list args_copy, int *printed, int *i)
 		field_width = format[*i] - '0';
 		for (j = *i + 1; _isdigit(format[j]); j++)
 			field_width = field_width * 10 + (format[j] - '0');
+
+		width->value = field_width;
 		*i = j;
 	}
 	else
 		return;
+}
 
-	pfn = get_print(&format[*i]);
-	len = get_length(pfn, args_copy);
+/**
+ * parse_width - parses width for printing
+ * @width: pointer to a width_t struct containing the width found
+ * @args_width: va_list of arguments
+ * @pfn: pointer to returned func from get_print()
+ * @printed: pointer to the count of characters printed
+ */
+void parse_width(width_t *width, va_list args_width,
+				 pfn_t pfn, int *printed)
+{
+	int k, len = 0;
+	char pad_char = width->is_zero ? '0' : ' ';
 
-	if (field_width > len)
+	if (!width->value && !width->is_astreak)
+		return;
+
+	/* if found (*) retrieve value from 1st arg in args_width */
+	if (width->is_astreak)
+		width->value = va_arg(args_width, int);
+
+	len = get_length(pfn, args_width);
+
+	if (width->value > len)
 	{
-		for (k = 0; k < field_width - len; k++)
+		for (k = 0; k < width->value - len; k++)
 			*printed += _putchar(pad_char);
 	}
 }
@@ -76,7 +103,9 @@ int get_length(int (*pfn)(va_list), va_list args_copy)
 
 	size = sizeof(functions) / sizeof(functions[0]);
 
-	if (pfn == print_char || pfn == print_str)
+	if (pfn == print_char)
+		len = 1;
+	else if (pfn == print_str)
 		len = _strlen(va_arg(args_copy, char *));
 	else if (pfn == print_int)
 	{
