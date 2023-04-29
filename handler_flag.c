@@ -38,8 +38,12 @@ void parse_flags(flags_t *flags, va_list args_flags,
 				 pfn_t pfn, int *printed)
 {
 	int num;
+	unsigned long l_unum;
 
-	num = va_arg(args_flags, long);
+	if (pfn == print_int)
+		num = va_arg(args_flags, long);
+	else
+		l_unum = va_arg(args_flags, long);
 
 	if (flags->plus && flags->space)
 		flags->space = 0;
@@ -51,11 +55,11 @@ void parse_flags(flags_t *flags, va_list args_flags,
 	/* handle flag: (#) */
 	if (flags->hash)
 	{
-		if (pfn == print_octal && num > 0)
+		if (pfn == print_octal && l_unum > 0)
 			*printed += _putchar('0');
-		else if (pfn == print_hex && num > 0)
+		else if (pfn == print_hex && l_unum > 0)
 			*printed += _puts("0x");
-		else if (pfn == print_HEX && num > 0)
+		else if (pfn == print_HEX && l_unum > 0)
 			*printed += _puts("0X");
 	}
 }
