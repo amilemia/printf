@@ -1,7 +1,7 @@
 #include "main.h"
 
 int _isdigit(int c);
-int get_length(int (*pfn)(va_list), va_list args_copy);
+int num_length(int (*pfn)(va_list), va_list args_copy);
 
 /**
  * get_width - Retrieve the width of a field from a format string
@@ -59,7 +59,7 @@ void parse_width(width_t *width, va_list args_width,
 	if (width->is_astreak)
 		width->value = va_arg(args_width, int);
 
-	len = get_length(pfn, args_width);
+	len = num_length(pfn, args_width);
 
 	if (width->value > len)
 	{
@@ -82,12 +82,12 @@ int _isdigit(int c)
 }
 
 /**
- * get_length - Calculates the length of the argument
+ * num_length - Calculates the length of the argument
  * @pfn: Pointer to the function to check
  * @args_copy: Copy of the list of arguments
  * Return: The length of the argument
  */
-int get_length(int (*pfn)(va_list), va_list args_copy)
+int num_length(int (*pfn)(va_list), va_list args_copy)
 {
 	int num_int;
 	unsigned int i = 0, len = 0, size, num_unsg;

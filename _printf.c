@@ -35,7 +35,11 @@ int _printf(const char *format, ...)
 
 			parse_flags(&flags, args_flags, pfn, &printed);
 			parse_width(&width, args_width, pfn, &printed);
+			parse_length(&flags, args, pfn, &printed);
 
+			/* TODO: check length outside this func*/
+			if (flags.h || flags.l)
+				continue;
 			/* for valid conversion call print_func, otherwise print as is*/
 			printed += pfn
 						   ? pfn(args)

@@ -16,6 +16,7 @@ pfn_t get_conversion(const char *format, int *i, va_list args,
 
 	get_flags(format, flags, i);
 	get_width(format, width, i);
+	get_length(format, flags, i);
 
 	if (width->is_astreak)
 		width->value = va_arg(args, int);

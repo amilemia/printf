@@ -30,6 +30,8 @@ typedef struct flags
 	int plus;
 	int space;
 	int hash;
+	int l;
+	int h;
 } flags_t;
 
 typedef struct width
@@ -57,6 +59,7 @@ int _printf(const char *format, ...);
 typedef int (*pfn_t)(va_list);
 void get_flags(const char *format, flags_t *flags, int *i);
 void get_width(const char *format, width_t *width, int *i);
+void get_length(const char *format, flags_t *flags, int *i);
 pfn_t get_print(const char *format);
 pfn_t get_conversion(const char *format, int *i, va_list args,
 					 flags_t *flags, width_t *width);
@@ -66,6 +69,8 @@ void parse_flags(flags_t *flags, va_list args_flags,
 				 pfn_t pfn, int *printed);
 void parse_width(width_t *width, va_list args_width,
 				 pfn_t pfn, int *printed);
+void parse_length(flags_t *flags, va_list args_flags,
+				  pfn_t pfn, int *printed);
 
 /* print_chars */
 int print_char(va_list list);
